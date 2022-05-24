@@ -18,7 +18,7 @@ public class SaleService {
         ArrayList<SaleModel> saleData = new ArrayList<SaleModel>();
 
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader("vendite.csv"));
+            BufferedReader csvReader = new BufferedReader(new FileReader("./vendite.csv"));
 
             String row = csvReader.readLine();
 
@@ -51,29 +51,22 @@ public class SaleService {
 
         System.out.println("\nYou'll need your user ID and a product ID to make an order");
 
+        // controlla se esiste l'utente
         System.out.println("\nPlease enter your ID:");
         System.out.print("\n> ");
         int userID = scanner.nextInt();
-        for (UserModel user : users) {
-            if (user.getUserID() == userID) {
-                break;
-            } else {
-                System.out.println("No such user");
-                return;
-            }
+        if (!isUserFound(users, userID)) {
+            System.out.println("user not found");
+            return;
         }
 
+        // controlla se esiste il prodotto
         System.out.println("\nPlease enter the desired product ID:");
         System.out.print("\n> ");
         int productID = Integer.parseInt(scanner.next());
-        for (ProductModel product : products) {
-            if (product.getID() == productID) {
-                product.setAvailable(false);
-                break;
-            } else {
-                System.out.println("No such product");
-                return;
-            }
+        if (!isProductFoundAndAvailable(products, productID)) {
+            System.out.println("No such product, check products availability");
+            return;
         }
 
         // genera nuovo ID
@@ -84,6 +77,34 @@ public class SaleService {
         SaleModel newOrder = new SaleModel(newOrderID, productID, userID);
         sales.add(newOrder);
         System.out.println("New order placed: " + newOrderID + " " + productID + " " + userID);
+    }
+
+    // metodi per cercare l'esistenza di utenti e prodotti durante un ordine
+    public static boolean isUserFound(ArrayList<UserModel> users, int userID) {
+        boolean found = false;
+        for (UserModel user : users) {
+            if (user.getUserID() == userID) {
+                found = true;
+                break;
+            } else {
+                found = false;
+            }
+        }
+        return found;
+    }
+
+    public static boolean isProductFoundAndAvailable(ArrayList<ProductModel> products, int productID) {
+        boolean found = false;
+        for (ProductModel product : products) {
+            if (product.getID() == productID && product.getAvailable()) {
+                product.setAvailable(false);
+                found = true;
+                break;
+            } else {
+                found = false;
+            }
+        }
+        return found;
     }
 
     // Metodo per restituire un acquisto

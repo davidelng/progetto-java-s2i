@@ -9,10 +9,6 @@ import java.util.Scanner;
 
 public class Service {
 
-    protected Product products;
-    protected User users;
-    protected Sale sales;
-
     private static Service service;
 
     private Service() {
@@ -27,6 +23,10 @@ public class Service {
         }
         return service;
     }
+
+    protected Product products;
+    protected User users;
+    protected Sale sales;
 
     // Eseguiamo un'azione in base all'input ricevuto dal Controller
     public void getOutput(int input, Scanner scanner) {

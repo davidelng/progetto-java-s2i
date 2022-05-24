@@ -1,6 +1,6 @@
 package org.planty_of_food;
 
-public class Main {
+public class Application {
 
     static String header = "***********************************************************************\n"
             + "*  ____  _             _            ___   __   _____               _  *\n"

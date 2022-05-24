@@ -14,7 +14,7 @@ public class UserService {
         ArrayList<UserModel> userData = new ArrayList<UserModel>();
 
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader("utenti.csv"));
+            BufferedReader csvReader = new BufferedReader(new FileReader("./utenti.csv")); //
 
             String row = csvReader.readLine();
 

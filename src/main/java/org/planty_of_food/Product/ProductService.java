@@ -13,7 +13,7 @@ public class ProductService {
         ArrayList<ProductModel> productData = new ArrayList<ProductModel>();
 
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader("prodotti.csv"));
+            BufferedReader csvReader = new BufferedReader(new FileReader("./prodotti.csv"));
 
             String row = csvReader.readLine();
 
